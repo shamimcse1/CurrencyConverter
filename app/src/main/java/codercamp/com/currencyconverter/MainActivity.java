@@ -55,45 +55,50 @@ public class MainActivity extends AppCompatActivity {
 
         button.setOnClickListener(v -> {
 
-            if (currencyToBeConverted.getText().toString().isEmpty()) {
-                currencyToBeConverted.setError("Please Enter Value");
-                currencyToBeConverted.requestFocus();
-                button.stopAnimation();
-            } else {
-                button.startAnimation();
-                RetrofitInterface retrofitInterface = RetrofitBuilder.getRetrofitInstance().create(RetrofitInterface.class);
-                Call<JsonObject> call = retrofitInterface.getExchangeCurrency(convertFromDropdown.getSelectedItem().toString());
-                call.enqueue(new Callback<JsonObject>() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
-                        JsonObject res = response.body();
-                        assert res != null;
-                        JsonObject rates = res.getAsJsonObject("rates");
-                        double currency = Double.parseDouble(currencyToBeConverted.getText().toString());
-                        double multiplier = Double.parseDouble(rates.get(convertToDropdown.getSelectedItem().toString()).toString());
-                        double result = currency * multiplier;
-                        currencyConvertedResult.setVisibility(View.VISIBLE);
-                        currencyConvertedResult.setText(currencyToBeConverted.getText().toString() + " " + convertFromDropdown.getSelectedItem().toString() + " = " + result + " " + convertToDropdown.getSelectedItem().toString());
-                        button.stopAnimation();
-                        button.revertAnimation();
-                    }
+            try {
 
-                    @Override
-                    public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
-                        button.stopAnimation();
-                        if (!isConnected()) {
-                            Toast.makeText(MainActivity.this, "Please Check Your Internet Connection", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(MainActivity.this, "Error" + t.getMessage(), Toast.LENGTH_SHORT).show();
-
+                if (currencyToBeConverted.getText().toString().isEmpty()) {
+                    currencyToBeConverted.setError("Please Enter Amount");
+                    currencyToBeConverted.requestFocus();
+                    button.stopAnimation();
+                } else {
+                    button.startAnimation();
+                    RetrofitInterface retrofitInterface = RetrofitBuilder.getRetrofitInstance().create(RetrofitInterface.class);
+                    Call<JsonObject> call = retrofitInterface.getExchangeCurrency(convertFromDropdown.getSelectedItem().toString());
+                    call.enqueue(new Callback<JsonObject>() {
+                        @SuppressLint("SetTextI18n")
+                        @Override
+                        public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
+                            JsonObject res = response.body();
+                            assert res != null;
+                            JsonObject rates = res.getAsJsonObject("rates");
+                            double currency = Double.parseDouble(currencyToBeConverted.getText().toString());
+                            double multiplier = Double.parseDouble(rates.get(convertToDropdown.getSelectedItem().toString()).toString());
+                            double result = currency * multiplier;
+                            currencyConvertedResult.setVisibility(View.VISIBLE);
+                            currencyConvertedResult.setText(currencyToBeConverted.getText().toString() + " " + convertFromDropdown.getSelectedItem().toString() + " = " + result + " " + convertToDropdown.getSelectedItem().toString());
+                            //button.stopAnimation();
+                            button.revertAnimation();
                         }
-                        button.stopAnimation();
-                        button.revertAnimation();
-                    }
-                });
-            }
 
+                        @Override
+                        public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
+                            button.stopAnimation();
+                            if (!isConnected()) {
+                                Toast.makeText(MainActivity.this, "Please Check Your Internet Connection", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(MainActivity.this, "Error" + t.getMessage(), Toast.LENGTH_SHORT).show();
+
+                            }
+                            //button.stopAnimation();
+                            button.revertAnimation();
+                        }
+                    });
+                }
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
 
         });
 

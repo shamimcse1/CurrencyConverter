@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Currency to be converted"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_gravity="center"
@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="From Currency:"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:textColor="@color/black"
                 android:layout_margin="20dp"
                 />
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="To Currency:"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:layout_margin="20dp"
                 android:textColor="@color/black"
                 />
@@ -97,42 +97,44 @@
                     tools:ignore="SpeakableTextPresentCheck" />
             </RelativeLayout>
 
-        </LinearLayout>
-        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-            android:id="@+id/button"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/review_text_bg"
-            android:text="Convert"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:maxWidth="150dp"
-            app:finalCornerAngle="50dp"
-            android:textAllCaps="false"
-            app:initialCornerAngle="0dp"
-            app:spinning_bar_color="#FFFFFF"
-            app:spinning_bar_padding="0dp"
-            android:elevation="10dp"
-            app:spinning_bar_width="3dp" />
 
-        <TextView
-            android:layout_marginTop="40dp"
-            android:id="@+id/currency_convertedResult"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Result"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:background="@drawable/border_spinner"
-            android:layout_gravity="center"
-            android:textColor="@color/black"
-            android:padding="10dp"
-            android:layout_margin="10dp"
-            android:visibility="invisible"
-            />
+            <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+                android:id="@+id/button"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/review_text_bg"
+                android:text="Convert"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:maxWidth="150dp"
+                app:finalCornerAngle="50dp"
+                android:textAllCaps="false"
+                app:initialCornerAngle="0dp"
+                app:spinning_bar_color="#FFFFFF"
+                app:spinning_bar_padding="0dp"
+                android:elevation="10dp"
+                app:spinning_bar_width="3dp" />
+
+            <TextView
+                android:id="@+id/currency_convertedResult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Result"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:background="@drawable/border_spinner"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:visibility="invisible"
+                />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 
