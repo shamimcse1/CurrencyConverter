@@ -1,4 +1,4 @@
-package codercamp.com.currencyconverter.Retrofit;
+package com.codercamp.currencyconverter.Retrofit;
 
 import com.google.gson.JsonObject;
 

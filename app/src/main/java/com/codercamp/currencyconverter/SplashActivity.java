@@ -1,4 +1,4 @@
-package codercamp.com.currencyconverter;
+package com.codercamp.currencyconverter;
 
 import androidx.appcompat.app.AppCompatActivity;
 

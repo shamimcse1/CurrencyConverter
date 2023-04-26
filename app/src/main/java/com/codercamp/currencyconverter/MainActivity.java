@@ -1,10 +1,11 @@
-package codercamp.com.currencyconverter;
+package com.codercamp.currencyconverter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -15,11 +16,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.codercamp.currencyconverter.Retrofit.RetrofitBuilder;
+import com.codercamp.currencyconverter.Retrofit.RetrofitInterface;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.gson.JsonObject;
 
 import br.com.simplepass.loadingbutton.customViews.CircularProgressButton;
-import codercamp.com.currencyconverter.Retrofit.RetrofitBuilder;
-import codercamp.com.currencyconverter.Retrofit.RetrofitInterface;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,25 +37,27 @@ public class MainActivity extends AppCompatActivity {
     Spinner convertFromDropdown;
     TextView currencyConvertedResult;
 
-
+    private AdView adView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        setContentView( R.layout.activity_main);
         //Initialization
         currencyToBeConverted = findViewById(R.id.currency_to_be_converted);
         convertToDropdown = findViewById(R.id.convert_to);
         convertFromDropdown = findViewById(R.id.convert_from);
         currencyConvertedResult = findViewById(R.id.currency_convertedResult);
         button = findViewById(R.id.button);
-
+        adView = (AdView) findViewById(R.id.adView);
 
         //Adding Functionality
         //String[] dropDownList = {"USD", "INR", "EUR", "NZD", "BDT"};
         String[] dropDownList = getResources().getStringArray(R.array.array_currency_codes);
+        String[] dropDownList2 = getResources().getStringArray(R.array.array_currency);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, dropDownList);
-        convertToDropdown.setAdapter(adapter);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, dropDownList2);
+        convertToDropdown.setAdapter(adapter2);
         convertFromDropdown.setAdapter(adapter);
 
 
@@ -101,12 +109,12 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-
+        loadAds();
 
     }
 
     public boolean isConnected() {
-        boolean connected = false;
+        boolean connected;
         try {
             ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo nInfo = cm.getActiveNetworkInfo();
@@ -116,5 +124,44 @@ public class MainActivity extends AppCompatActivity {
             //Log.e("Connectivity Exception", e.getMessage());
         }
         return false;
+    }
+
+    @Override
+    protected void onResume() {
+        if (adView != null) {
+            adView.resume();
+        }
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        if (adView != null) {
+            adView.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (adView != null) {
+            adView.destroy();
+        }
+        super.onDestroy();
+    }
+
+    private void loadAds() {
+        // Initialize the Mobile Ads SDK
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(@NonNull InitializationStatus initializationStatus) {
+                Log.d("successful", "successful");
+            }
+        });
+        AdRequest adRequest = new AdRequest.Builder().build();
+        if (adView != null) {
+            adView.loadAd(adRequest);
+        }
+
     }
 }

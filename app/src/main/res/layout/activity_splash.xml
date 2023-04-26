@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     android:gravity="center"
+    android:background="#FFFFFF"
     tools:context=".SplashActivity">
 
 
@@ -13,7 +14,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="300dp"
-        android:src="@drawable/currency"
+        android:src="@drawable/splash"
         android:layout_margin="20dp"
         android:scaleType="fitCenter"
         />

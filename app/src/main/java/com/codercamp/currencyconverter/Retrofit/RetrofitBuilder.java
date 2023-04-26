@@ -1,4 +1,4 @@
-package codercamp.com.currencyconverter.Retrofit;
+package com.codercamp.currencyconverter.Retrofit;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

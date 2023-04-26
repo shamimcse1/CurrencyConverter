@@ -1,142 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginTop="28dp"
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        ads:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_marginTop="20dp"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Currency to be converted"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/currency_to_be_converted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edit_text_bg"
+            android:drawableLeft="@drawable/ic_doller_symbol"
+            android:drawablePadding="10dp"
+            android:elevation="5dp"
+            android:hint="Please Enter Amount"
+            android:imeOptions="actionDone"
+            android:inputType="numberDecimal"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            android:textIsSelectable="true" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_margin="20dp"
+            android:text="From Currency:"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/border_spinner">
+
+            <Spinner
+                android:id="@+id/convert_from"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="To Currency:"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/border_spinner">
+
+            <Spinner
+                android:id="@+id/convert_to"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </RelativeLayout>
+
+
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+            android:id="@+id/button"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Currency to be converted"
-                android:textSize="25sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                android:layout_margin="20dp"
-                />
-            <EditText
-                android:id="@+id/currency_to_be_converted"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/edit_text_bg"
-                android:drawableLeft="@drawable/ic_doller_symbol"
-                android:drawablePadding="10dp"
-                android:elevation="5dp"
-                android:hint="Please Enter Amount"
-                android:textColor="@color/black"
-                android:imeOptions="actionDone"
-                android:inputType="numberDecimal"
-                android:padding="12dp"
-                android:textIsSelectable="true"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="From Currency:"
-                android:textSize="15sp"
-                android:textColor="@color/black"
-                android:layout_margin="20dp"
-                />
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border_spinner"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                >
+            android:layout_marginTop="20dp"
+            android:background="@drawable/review_text_bg"
+            android:elevation="10dp"
+            android:maxWidth="150dp"
+            android:text="Convert"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:finalCornerAngle="50dp"
+            app:initialCornerAngle="0dp"
+            app:spinning_bar_color="#FFFFFF"
+            app:spinning_bar_padding="0dp"
+            app:spinning_bar_width="3dp" />
 
-                <Spinner
-                    android:id="@+id/convert_from"
-                    android:layout_width="300dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
+        <TextView
+            android:id="@+id/currency_convertedResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/border_spinner"
+            android:padding="10dp"
+            android:text="Result"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:visibility="invisible" />
 
-
-                    />
-            </RelativeLayout>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="To Currency:"
-                android:textSize="15sp"
-                android:layout_margin="20dp"
-                android:textColor="@color/black"
-                />
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border_spinner"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                >
-
-                <Spinner
-                    android:id="@+id/convert_to"
-                    android:layout_width="300dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    tools:ignore="SpeakableTextPresentCheck" />
-            </RelativeLayout>
-
-
-            <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-                android:id="@+id/button"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/review_text_bg"
-                android:text="Convert"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:maxWidth="150dp"
-                app:finalCornerAngle="50dp"
-                android:textAllCaps="false"
-                app:initialCornerAngle="0dp"
-                app:spinning_bar_color="#FFFFFF"
-                app:spinning_bar_padding="0dp"
-                android:elevation="10dp"
-                app:spinning_bar_width="3dp" />
-
-            <TextView
-                android:id="@+id/currency_convertedResult"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Result"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:background="@drawable/border_spinner"
-                android:layout_gravity="center"
-                android:textColor="@color/black"
-                android:padding="10dp"
-                android:layout_margin="10dp"
-                android:visibility="invisible"
-                />
-
-        </LinearLayout>
 
     </LinearLayout>
 
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"
+        ads:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</ScrollView>
