@@ -91,15 +91,18 @@ public class MainActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
-                            button.stopAnimation();
+                           // button.stopAnimation();
                             if (!isConnected()) {
                                 Toast.makeText(MainActivity.this, "Please Check Your Internet Connection", Toast.LENGTH_SHORT).show();
+                                button.revertAnimation();
+                                button.stopAnimation();
                             } else {
                                 Toast.makeText(MainActivity.this, "Error" + t.getMessage(), Toast.LENGTH_SHORT).show();
-
+                                button.stopAnimation();
+                                button.revertAnimation();
                             }
                             //button.stopAnimation();
-                            button.revertAnimation();
+                            //button.revertAnimation();
                         }
                     });
                 }

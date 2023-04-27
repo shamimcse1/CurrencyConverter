@@ -362,8 +362,8 @@
         <item>ZMW</item>
         <item>ZWL</item>
     </string-array>
-    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="admob_app_id">ca-app-pub-1337577089653332~1417656666</string>
     <string name="banner_ad_sample" translatable="false">Banner Ad Sample</string>
-    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-1337577089653332/6965496812</string>
 
 </resources>
