@@ -6,10 +6,10 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.codercamp.currencyconverter"
+        applicationId "com.shamim.currencyexchange"
         minSdk 22
         targetSdk 33
-        versionCode 2
+        versionCode 1
         versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -55,5 +55,5 @@ dependencies {
     //circular-progress-button
     implementation 'br.com.simplepass:loading-button-android:2.2.0'
 
-    implementation 'com.google.android.gms:play-services-ads:22.0.0'
+    //implementation 'com.google.android.gms:play-services-ads:22.0.0'
 }
