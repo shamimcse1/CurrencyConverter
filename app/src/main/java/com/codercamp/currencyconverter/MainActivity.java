@@ -18,11 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.codercamp.currencyconverter.Retrofit.RetrofitBuilder;
 import com.codercamp.currencyconverter.Retrofit.RetrofitInterface;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.gson.JsonObject;
 
 import br.com.simplepass.loadingbutton.customViews.CircularProgressButton;
@@ -36,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
     Spinner convertToDropdown;
     Spinner convertFromDropdown;
     TextView currencyConvertedResult;
-
-    private AdView adView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         convertFromDropdown = findViewById(R.id.convert_from);
         currencyConvertedResult = findViewById(R.id.currency_convertedResult);
         button = findViewById(R.id.button);
-        adView = (AdView) findViewById(R.id.adView);
 
         //Adding Functionality
         //String[] dropDownList = {"USD", "INR", "EUR", "NZD", "BDT"};
@@ -112,8 +104,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-        loadAds();
-
     }
 
     public boolean isConnected() {
@@ -131,40 +121,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        if (adView != null) {
-            adView.resume();
-        }
         super.onResume();
     }
 
     @Override
     protected void onPause() {
-        if (adView != null) {
-            adView.pause();
-        }
         super.onPause();
     }
 
     @Override
     protected void onDestroy() {
-        if (adView != null) {
-            adView.destroy();
-        }
+
         super.onDestroy();
     }
 
-    private void loadAds() {
-        // Initialize the Mobile Ads SDK
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(@NonNull InitializationStatus initializationStatus) {
-                Log.d("successful", "successful");
-            }
-        });
-        AdRequest adRequest = new AdRequest.Builder().build();
-        if (adView != null) {
-            adView.loadAd(adRequest);
-        }
-
-    }
 }
